@@ -1,0 +1,7 @@
+{
+  "name": "AgentKit",
+  "description": "Coinbase's toolkit for building payment-enabled agents",
+  "url": "https://github.com/coinbase/agentkit",
+  "category": "client-integrations",
+  "logo": null
+}

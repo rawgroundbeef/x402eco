@@ -1,0 +1,7 @@
+{
+  "name": "x402-fetch",
+  "description": "Drop-in fetch wrapper with automatic 402 handling",
+  "url": "https://github.com/anthropics/x402-fetch",
+  "category": "client-integrations",
+  "logo": null
+}

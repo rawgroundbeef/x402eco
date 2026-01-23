@@ -1,0 +1,7 @@
+{
+  "name": "x402-server",
+  "description": "Express middleware for adding 402 to any API",
+  "url": "https://github.com/anthropics/x402-server",
+  "category": "infrastructure-tooling",
+  "logo": null
+}
