@@ -3,5 +3,5 @@
   "description": "Account-free IPFS uploads/retrievals using crypto via x402",
   "url": "https://402.pinata.cloud/",
   "category": "services-endpoints",
-  "logo": "/logos/pinata.svg"
+  "logo": null
 }
