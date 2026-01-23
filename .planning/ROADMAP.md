@@ -61,10 +61,17 @@ Plans:
   5. All Infrastructure & Tooling from x402.org exist as JSON entries
   6. All Learning & Community from x402.org exist as JSON entries
   7. All logos are downloaded and stored locally
-**Plans**: TBD
+**Plans**: 8 plans
 
 Plans:
-- [ ] TBD
+- [ ] 03-01-PLAN.md — Logo infrastructure and fallback UI
+- [ ] 03-02-PLAN.md — Populate Client-Side Integrations (15 entries)
+- [ ] 03-03-PLAN.md — Populate Services & Endpoints Part 1 (15 entries)
+- [ ] 03-04-PLAN.md — Populate Services & Endpoints Part 2 (15 entries)
+- [ ] 03-05-PLAN.md — Populate Infrastructure & Tooling Part 1 (19 entries)
+- [ ] 03-06-PLAN.md — Populate Infrastructure & Tooling Part 2 (19 entries)
+- [ ] 03-07-PLAN.md — Populate Learning & Community (6 entries)
+- [ ] 03-08-PLAN.md — Logo acquisition and verification
 
 ### Phase 4: Contributor Experience
 **Goal**: Contributors can add new ecosystem entries via PR with clear guidance
@@ -88,5 +95,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 |-------|----------------|--------|-----------|
 | 1. Data Structure | 2/2 | Complete | 2026-01-23 |
 | 2. Ecosystem Display | 1/1 | Complete | 2026-01-23 |
-| 3. Logo Management & Content Population | 0/TBD | Not started | - |
+| 3. Logo Management & Content Population | 0/8 | Not started | - |
 | 4. Contributor Experience | 0/TBD | Not started | - |
