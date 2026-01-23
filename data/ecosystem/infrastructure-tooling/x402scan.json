@@ -3,5 +3,5 @@
   "description": "Block explorer for x402 transactions",
   "url": "https://x402scan.com",
   "category": "infrastructure-tooling",
-  "logo": null
+  "logo": "/logos/x402scan.png"
 }

@@ -3,5 +3,5 @@
   "description": "Web scraping API converting websites into LLM-ready data",
   "url": "https://firecrawl.dev",
   "category": "services-endpoints",
-  "logo": null
+  "logo": "/logos/firecrawl.png"
 }
