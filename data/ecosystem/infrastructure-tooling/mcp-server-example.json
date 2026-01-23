@@ -1,0 +1,7 @@
+{
+  "name": "MCP Server Example",
+  "description": "Reference implementation MCP server and wallet for x402 endpoints",
+  "url": "https://github.com/coinbase/x402/tree/main/examples/typescript/mcp",
+  "category": "infrastructure-tooling",
+  "logo": null
+}
