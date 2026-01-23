@@ -68,7 +68,7 @@ export function EcosystemBrowser({ categoriesWithEntries }: EcosystemBrowserProp
       <div className="md:hidden w-full mb-4">
         <select
           value={activeCategory}
-          onChange={(e) => setActiveCategory(e.target.value)}
+          onChange={(e) => setActiveCategory(e.target.value as typeof activeCategory)}
           className="w-full px-4 py-2 bg-card border border-border rounded-lg text-text"
         >
           {categoriesWithEntries.map(({ category, entries }) => (
