@@ -1,0 +1,7 @@
+{
+  "name": "X402 Kit",
+  "description": "Fully modular Rust SDK for complex x402 payment integrations",
+  "url": "https://github.com/AIMOverse/x402-kit",
+  "category": "infrastructure-tooling",
+  "logo": null
+}
