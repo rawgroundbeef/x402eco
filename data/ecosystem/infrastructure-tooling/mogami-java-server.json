@@ -3,5 +3,5 @@
   "description": "Java Server SDK turning Spring endpoints into pay-per-call APIs",
   "url": "https://mogami.tech/#serverSDK",
   "category": "infrastructure-tooling",
-  "logo": null
+  "logo": "/logos/logo_mogami_vertical_small.png"
 }
