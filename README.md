@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# x402.eco
 
-## Getting Started
+The x402 ecosystem directory. Built with Next.js.
 
-First, run the development server:
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Adding an ecosystem entry
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Entries are JSON files in `data/ecosystem/`. The site picks them up automatically — no code changes needed.
 
-## Learn More
+### 1. Choose a category
 
-To learn more about Next.js, take a look at the following resources:
+| Slug | Description |
+|------|-------------|
+| `client-integrations` | SDKs, libraries, and client-side tools |
+| `services-endpoints` | APIs and services monetized with x402 |
+| `infrastructure-tooling` | Developer tools, validators, dashboards |
+| `facilitators` | Payment facilitators |
+| `learning-community` | Guides, tutorials, community resources |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Create a JSON file
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Add a file to `data/ecosystem/{category-slug}/{your-project}.json`:
 
-## Deploy on Vercel
+```json
+{
+  "name": "Your Project",
+  "description": "One or two sentences describing what it does.",
+  "url": "https://yourproject.com",
+  "category": "infrastructure-tooling",
+  "logo": "/logos/your-project.png"
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+All fields except `logo` are required. If you don't have a logo, set it to `null` — the site will show a letter fallback.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 3. Add a logo (optional)
+
+Drop your logo in `public/logos/`. PNG or SVG, any reasonable size.
+
+### 4. Submit a PR
+
+```bash
+git checkout -b add-your-project
+git add data/ecosystem/ public/logos/
+git commit -m "feat(ecosystem): add Your Project"
+```
+
+Open a PR against `main`.
