@@ -467,6 +467,12 @@ export default function Home() {
                 >
                   x402.org
                 </a>
+                <a
+                  href="/terms"
+                  className="text-sm text-gray hover:text-accent transition-colors"
+                >
+                  Terms
+                </a>
               </div>
             </div>
           </FadeIn>
