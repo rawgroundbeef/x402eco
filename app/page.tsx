@@ -8,9 +8,9 @@ import {
   HeroInfoButtons,
   FacilitatorsSection,
   ThesisInfoButton,
+  StatsBar,
 } from "@/components/HomeClient";
 import {
-  stats,
   facilitators,
   educationalContent,
 } from "@/lib/data";
@@ -22,18 +22,18 @@ export default function Home() {
         <EducationalDialogContainer />
 
       {/* Sticky Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-header">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-header border-b border-border/50">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
+          <div className="flex items-center gap-2">
             <Logo size="sm" />
-            <span className="text-xl font-serif text-text">x402</span>
+            <span className="text-2xl text-text leading-none translate-y-[1px]" style={{ fontFamily: "var(--font-display), 'Bebas Neue', sans-serif", letterSpacing: "2px" }}>x402</span>
           </div>
           <div className="flex items-center gap-6">
             <nav className="hidden md:flex items-center gap-6">
-              <a href="#ecosystem" className="text-sm text-text-muted hover:text-text transition-colors">
+              <a href="#ecosystem" className="text-sm text-gray hover:text-white transition-colors">
                 Ecosystem
               </a>
-              <a href="#facilitators" className="text-sm text-text-muted hover:text-text transition-colors">
+              <a href="#facilitators" className="text-sm text-gray hover:text-white transition-colors">
                 Facilitators
               </a>
             </nav>
@@ -45,65 +45,43 @@ export default function Home() {
       {/* ============================================ */}
       {/* SECTION 1: HERO */}
       {/* ============================================ */}
-      <section className="relative overflow-hidden noise-texture">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 pt-12 pb-20 md:pt-16 md:pb-28">
+      <section className="relative overflow-hidden min-h-screen flex flex-col">
+        {/* Hazy gradient background */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-accent/5 dark:bg-accent/5 rounded-full blur-[120px]" />
+          <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-accent/[0.03] dark:bg-accent/[0.03] rounded-full blur-[100px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-black/[0.02] dark:bg-white/[0.02] rounded-full blur-[80px]" />
+        </div>
 
-          {/* Hero Content */}
-          <div className="max-w-3xl mx-auto text-center">
-            <FadeIn>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl text-text mb-6">
+        {/* Center Content */}
+        <div className="relative z-10 flex-1 flex flex-col justify-center items-center text-center px-4 md:px-8">
+          <div className="max-w-4xl mx-auto lime-glow">
+            <FadeIn delay={0.05}>
+              <h1 className="text-text mb-6">
                 The Payment Layer
                 <br />
-                for AI Agents
+                for <span className="text-accent">AI Agents</span>
               </h1>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <p className="text-lg md:text-xl text-text-muted leading-relaxed mb-8 text-balance">
+              <p className="text-lg md:text-xl text-gray leading-relaxed mb-10 text-balance max-w-2xl mx-auto">
                 x402 enables AI agents to autonomously pay for resources and
                 services across the internet. No API keys. No subscriptions.
                 Just seamless, pay-per-use access to any monetized endpoint.
               </p>
             </FadeIn>
             <HeroInfoButtons />
+            <FadeIn delay={0.2}>
+              <div className="mt-12">
+                <StatsBar />
+              </div>
+            </FadeIn>
           </div>
-
-          {/* Stats Row */}
-          <FadeInStagger className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16">
-            {[
-              { label: "Total Volume", ...stats.totalVolume },
-              { label: "Active Resources", ...stats.activeResources },
-              { label: "Transactions (24h)", ...stats.transactions24h },
-              { label: "Facilitators", ...stats.facilitators },
-            ].map((stat) => (
-              <FadeInStaggerItem
-                key={stat.label}
-                className="bg-card border border-border rounded-xl p-4 md:p-6 card-hover"
-              >
-                <p className="text-xs md:text-sm text-text-muted uppercase tracking-wide mb-1">
-                  {stat.label}
-                </p>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl md:text-3xl font-serif text-text">
-                    {stat.value}
-                  </span>
-                  <span
-                    className={`text-sm font-medium ${
-                      stat.positive ? "text-success" : "text-warning"
-                    }`}
-                  >
-                    {stat.change}
-                  </span>
-                </div>
-              </FadeInStaggerItem>
-            ))}
-          </FadeInStagger>
         </div>
-      </section>
 
-      {/* ============================================ */}
-      {/* SECTION 2: RESOURCES & SERVERS - ARCHIVED */}
-      {/* See components/ServersResourcesSection.tsx to re-enable */}
-      {/* ============================================ */}
+        {/* Fade gradient to background */}
+        <div className="absolute bottom-0 left-0 right-0 h-72 z-[5] pointer-events-none hero-fade" />
+      </section>
 
       {/* ============================================ */}
       {/* SECTION 3: ECOSYSTEM */}
@@ -118,31 +96,32 @@ export default function Home() {
       {/* ============================================ */}
       {/* SECTION 5: THESIS */}
       {/* ============================================ */}
-      <section className="py-16 md:py-24 bg-card/50">
-        <div className="max-w-3xl mx-auto px-4 md:px-8 text-center">
+      <section className="py-16 md:py-24 bg-surface-card/50">
+        <div className="max-w-[720px] mx-auto px-4 md:px-8 text-center">
           <FadeIn>
-            <h2 className="text-3xl md:text-4xl text-text mb-8">
+            <h2 className="text-text mb-10">
               Why This Matters
             </h2>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <div className="prose prose-lg mx-auto text-text-muted">
-              <p className="text-lg leading-relaxed mb-6">
+            <div className="space-y-6 text-lg md:text-xl text-gray leading-relaxed">
+              <p>
                 The internet was built for humans. Pages, forms, subscriptions,
                 API keys—all designed for people to navigate and negotiate. But
                 AI agents don&apos;t work like that. They need to access resources
                 programmatically, instantly, and at massive scale.
               </p>
-              <p className="text-lg leading-relaxed mb-6">
+              <p>
                 x402 creates a new primitive: the ability for any software agent
                 to pay for any resource, in real-time, with no pre-negotiation.
                 It&apos;s HTTP extended with native payments.
               </p>
-              <p className="text-xl leading-relaxed mb-8 text-text font-serif italic">
-                &ldquo;In five years, more economic activity will happen between
-                machines than between humans and machines.&rdquo;
-              </p>
-              <p className="text-lg leading-relaxed">
+              <blockquote className="text-3xl md:text-4xl text-accent italic my-12 leading-snug max-w-3xl mx-auto relative" style={{ fontFamily: "var(--font-display), 'Bebas Neue', sans-serif", letterSpacing: "1px" }}>
+                <span className="absolute -left-4 md:-left-8 -top-4 md:-top-6 text-5xl md:text-6xl text-accent/20 select-none" style={{ fontFamily: "Georgia, serif" }}>&ldquo;</span>
+                In five years, more economic activity will happen between
+                machines than between humans and machines.
+              </blockquote>
+              <p>
                 x402 is the infrastructure that makes this possible. It&apos;s how
                 agents will pay for compute, data, inference, and every other
                 resource they need to be useful.
@@ -156,14 +135,14 @@ export default function Home() {
       {/* ============================================ */}
       {/* SECTION 6: GET STARTED */}
       {/* ============================================ */}
-      <section id="get-started" className="py-16 md:py-24 bg-dark-bg text-white relative overflow-hidden scroll-mt-16">
+      <section id="get-started" className="py-16 md:py-24 bg-background relative overflow-hidden scroll-mt-16">
         {/* Subtle pattern overlay */}
-        <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 opacity-[0.02]">
           <div
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+                "radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)",
               backgroundSize: "40px 40px",
             }}
           />
@@ -171,17 +150,17 @@ export default function Home() {
 
         <div className="max-w-6xl mx-auto px-4 md:px-8 relative">
           <FadeIn>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl mb-3">Get Started</h2>
-              <p className="text-white/60">Three paths into the x402 ecosystem</p>
+            <div className="text-center mb-14">
+              <h2 className="text-text mb-3">Get Started</h2>
+              <p className="text-gray">Three paths into the x402 ecosystem</p>
             </div>
           </FadeIn>
 
           <FadeInStagger className="grid md:grid-cols-3 gap-6" staggerDelay={0.15}>
             {/* Build with x402 */}
             <FadeInStaggerItem>
-              <div className="bg-dark-card rounded-xl p-6 border border-white/10">
-              <div className="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center mb-4">
+              <div className="bg-surface-card rounded-xl p-6 border border-border hover:border-accent/30 transition-colors h-full">
+              <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
                 <svg
                   className="w-6 h-6 text-accent"
                   fill="none"
@@ -196,8 +175,8 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-serif mb-2">Build with x402</h3>
-              <p className="text-white/60 text-sm mb-6">
+              <h3 className="mb-2 text-text">Build with x402</h3>
+              <p className="text-gray text-sm mb-6">
                 Add payment capabilities to your AI agents with our SDKs and
                 tooling.
               </p>
@@ -206,7 +185,7 @@ export default function Home() {
                   href="https://x402.org/docs"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-white/80 hover:text-accent transition-colors"
+                  className="flex items-center gap-2 text-sm text-gray hover:text-accent transition-colors"
                 >
                   <span>Documentation</span>
                   <svg
@@ -227,7 +206,7 @@ export default function Home() {
                   href="https://github.com/anthropics/x402-fetch"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-white/80 hover:text-accent transition-colors"
+                  className="flex items-center gap-2 text-sm text-gray hover:text-accent transition-colors"
                 >
                   <span>x402-fetch SDK</span>
                   <svg
@@ -248,7 +227,7 @@ export default function Home() {
                   href="https://github.com/coinbase/agentkit"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-white/80 hover:text-accent transition-colors"
+                  className="flex items-center gap-2 text-sm text-gray hover:text-accent transition-colors"
                 >
                   <span>AgentKit</span>
                   <svg
@@ -271,8 +250,8 @@ export default function Home() {
 
             {/* Monetize Your API */}
             <FadeInStaggerItem>
-              <div className="bg-dark-card rounded-xl p-6 border border-white/10">
-                <div className="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center mb-4">
+              <div className="bg-surface-card rounded-xl p-6 border border-border hover:border-accent/30 transition-colors h-full">
+                <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
                   <svg
                     className="w-6 h-6 text-accent"
                     fill="none"
@@ -287,8 +266,8 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-serif mb-2">Monetize Your API</h3>
-              <p className="text-white/60 text-sm mb-6">
+                <h3 className="mb-2 text-text">Monetize Your API</h3>
+              <p className="text-gray text-sm mb-6">
                 Turn any API into a paid resource with our server middleware
                 and facilitator integrations.
               </p>
@@ -297,7 +276,7 @@ export default function Home() {
                   href="https://github.com/anthropics/x402-server"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-white/80 hover:text-accent transition-colors"
+                  className="flex items-center gap-2 text-sm text-gray hover:text-accent transition-colors"
                 >
                   <span>Server SDK</span>
                   <svg
@@ -318,7 +297,7 @@ export default function Home() {
                   href="https://x402jobs.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-white/80 hover:text-accent transition-colors"
+                  className="flex items-center gap-2 text-sm text-gray hover:text-accent transition-colors"
                 >
                   <span>List on x402jobs</span>
                   <svg
@@ -339,7 +318,7 @@ export default function Home() {
                   href="https://openfacilitator.xyz"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-white/80 hover:text-accent transition-colors"
+                  className="flex items-center gap-2 text-sm text-gray hover:text-accent transition-colors"
                 >
                   <span>OpenFacilitator</span>
                   <svg
@@ -362,8 +341,8 @@ export default function Home() {
 
             {/* Join the Community */}
             <FadeInStaggerItem>
-              <div className="bg-dark-card rounded-xl p-6 border border-white/10">
-                <div className="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center mb-4">
+              <div className="bg-surface-card rounded-xl p-6 border border-border hover:border-accent/30 transition-colors h-full">
+                <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
                   <svg
                     className="w-6 h-6 text-accent"
                     fill="none"
@@ -378,8 +357,8 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-serif mb-2">Join the Community</h3>
-                <p className="text-white/60 text-sm mb-6">
+                <h3 className="mb-2 text-text">Join the Community</h3>
+                <p className="text-gray text-sm mb-6">
                   Connect with builders, learn from experts, and shape the future
                   of agent payments.
                 </p>
@@ -388,7 +367,7 @@ export default function Home() {
                     href="https://agentbuilders.club"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-white/80 hover:text-accent transition-colors"
+                    className="flex items-center gap-2 text-sm text-gray hover:text-accent transition-colors"
                   >
                     <span>Agent Builders Club</span>
                     <svg
@@ -409,7 +388,7 @@ export default function Home() {
                   href="https://discord.gg/x402"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-white/80 hover:text-accent transition-colors"
+                  className="flex items-center gap-2 text-sm text-gray hover:text-accent transition-colors"
                 >
                   <span>Discord</span>
                   <svg
@@ -430,7 +409,7 @@ export default function Home() {
                   href="https://twitter.com/x402protocol"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-white/80 hover:text-accent transition-colors"
+                  className="flex items-center gap-2 text-sm text-gray hover:text-accent transition-colors"
                 >
                   <span>Twitter</span>
                   <svg
@@ -454,10 +433,10 @@ export default function Home() {
 
           {/* Footer */}
           <FadeIn delay={0.3}>
-            <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="mt-20 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <Logo size="sm" />
-                <span className="text-white/60 text-sm">
+                <span className="text-gray text-sm">
                   x402.eco — The Payment Layer for AI Agents
                 </span>
               </div>
@@ -466,7 +445,7 @@ export default function Home() {
                   href="https://www.x402.org/x402-whitepaper.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-white/60 hover:text-white transition-colors"
+                  className="text-sm text-gray hover:text-accent transition-colors"
                 >
                   Whitepaper
                 </a>
@@ -474,7 +453,7 @@ export default function Home() {
                   href="https://x402.org"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-white/60 hover:text-white transition-colors"
+                  className="text-sm text-gray hover:text-accent transition-colors"
                 >
                   x402.org
                 </a>

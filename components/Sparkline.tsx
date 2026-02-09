@@ -29,17 +29,20 @@ export function Sparkline({
     value,
   }));
 
-  const accentColor = mounted && resolvedTheme === "dark" ? "#14B8A6" : "#0D9488";
-  const tooltipBg = mounted && resolvedTheme === "dark" ? "#18181B" : "#FAFAF9";
-  const tooltipBorder = mounted && resolvedTheme === "dark" ? "#27272A" : "#E5E5E3";
+  // Lime accent color for the new design
+  const accentColor = mounted && resolvedTheme === "light" ? "#a8d900" : "#c8ff00";
+  const tooltipBg = mounted && resolvedTheme === "light" ? "#FAFAF9" : "#1a1a1e";
+  const tooltipBorder = mounted && resolvedTheme === "light" ? "#E5E5E3" : "#27272d";
+  const tooltipText = mounted && resolvedTheme === "light" ? "#18181B" : "#ededeb";
 
   return (
     <div style={{ width, height }}>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={chartData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
           <defs>
-            <linearGradient id={`sparklineGradient-${mounted ? resolvedTheme : 'light'}`} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={accentColor} stopOpacity={0.3} />
+            <linearGradient id={`sparklineGradient-${mounted ? resolvedTheme : 'dark'}`} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor={accentColor} stopOpacity={0.4} />
+              <stop offset="50%" stopColor={accentColor} stopOpacity={0.15} />
               <stop offset="100%" stopColor={accentColor} stopOpacity={0} />
             </linearGradient>
           </defs>
@@ -48,13 +51,14 @@ export function Sparkline({
               contentStyle={{
                 background: tooltipBg,
                 border: `1px solid ${tooltipBorder}`,
-                borderRadius: "6px",
+                borderRadius: "8px",
                 fontSize: "12px",
-                padding: "4px 8px",
-                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                padding: "6px 10px",
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
+                color: tooltipText,
               }}
               labelStyle={{ display: "none" }}
-              formatter={(value) => [(value as number).toLocaleString(), ""]}
+              formatter={(value) => [`${(value as number).toLocaleString()} txns`, ""]}
             />
           )}
           <Area
@@ -62,7 +66,7 @@ export function Sparkline({
             dataKey="value"
             stroke={accentColor}
             strokeWidth={1.5}
-            fill={`url(#sparklineGradient-${mounted ? resolvedTheme : 'light'})`}
+            fill={`url(#sparklineGradient-${mounted ? resolvedTheme : 'dark'})`}
             isAnimationActive={false}
           />
         </AreaChart>

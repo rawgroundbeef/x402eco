@@ -51,19 +51,19 @@ export function EducationalDialog({
     >
       <div
         ref={dialogRef}
-        className="relative w-full max-w-lg bg-card border border-border rounded-xl shadow-2xl animate-scale-in"
+        className="relative w-full max-w-lg bg-surface-card border border-border rounded-xl shadow-2xl animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex items-center justify-between p-6 pb-4 border-b border-border">
-          <h3 className="text-2xl text-text font-serif">{title}</h3>
+          <h3 className="text-2xl text-text">{title}</h3>
           <button
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-border transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors"
             aria-label="Close dialog"
           >
             <svg
-              className="w-5 h-5 text-text-muted"
+              className="w-5 h-5 text-gray"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -80,20 +80,20 @@ export function EducationalDialog({
 
         {/* Content */}
         <div className="p-6 pt-4">
-          <div className="prose prose-warm">
+          <div className="space-y-4 text-lg">
             {content.split("\n\n").map((paragraph, index) => {
               if (paragraph.startsWith("•")) {
                 const items = paragraph.split("\n").filter((l) => l.startsWith("•"));
                 return (
-                  <ul key={index} className="list-none space-y-2 my-4">
+                  <ul key={index} className="list-none space-y-3 my-4">
                     {items.map((item, i) => (
                       <li
                         key={i}
-                        className="flex items-start gap-2 text-text-muted"
+                        className="flex items-start gap-3 text-gray"
                       >
                         <span className="text-accent mt-1">
                           <svg
-                            className="w-4 h-4"
+                            className="w-5 h-5"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -113,13 +113,13 @@ export function EducationalDialog({
               if (paragraph.match(/^\d\./)) {
                 const items = paragraph.split("\n").filter((l) => l.match(/^\d\./));
                 return (
-                  <ol key={index} className="list-none space-y-2 my-4">
+                  <ol key={index} className="list-none space-y-3 my-4">
                     {items.map((item, i) => (
                       <li
                         key={i}
-                        className="flex items-start gap-3 text-text-muted"
+                        className="flex items-start gap-3 text-gray"
                       >
-                        <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-accent/10 text-accent rounded-full text-sm font-medium">
+                        <span className="flex-shrink-0 w-7 h-7 flex items-center justify-center bg-accent/10 text-accent rounded-full text-base font-medium">
                           {i + 1}
                         </span>
                         <span>{item.replace(/^\d\.\s*/, "")}</span>
@@ -129,7 +129,7 @@ export function EducationalDialog({
                 );
               }
               return (
-                <p key={index} className="text-text-muted leading-relaxed mb-4">
+                <p key={index} className="text-gray leading-relaxed">
                   {paragraph}
                 </p>
               );
@@ -141,7 +141,7 @@ export function EducationalDialog({
         <div className="px-6 pb-6">
           <button
             onClick={onClose}
-            className="w-full py-3 px-4 bg-accent text-white font-medium rounded-lg hover:bg-accent/90 transition-colors"
+            className="w-full py-3 px-4 bg-accent text-black font-medium rounded-lg hover:bg-accent-hover transition-colors"
           >
             Got it
           </button>
