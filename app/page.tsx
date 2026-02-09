@@ -46,7 +46,7 @@ export default function Home() {
       {/* ============================================ */}
       {/* SECTION 1: HERO */}
       {/* ============================================ */}
-      <section className="relative overflow-hidden min-h-screen flex flex-col">
+      <section className="relative overflow-hidden min-h-[600px] max-h-[calc(100vh-80px)] flex flex-col">
         {/* Hazy gradient background */}
         <div className="absolute inset-0 z-0">
           <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-accent/5 dark:bg-accent/5 rounded-full blur-[120px]" />
