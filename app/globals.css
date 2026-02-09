@@ -105,7 +105,14 @@ body::after {
 /* Base theme colors applied via classes */
 .bg-background { background-color: var(--color-background); }
 .bg-header { background-color: rgba(8, 8, 10, 0.8); }
-.light .bg-header { background-color: rgba(255, 255, 255, 0.9); }
+.light .bg-header {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Header border light mode */
+.light header {
+  border-color: #E5E5E3 !important;
+}
 
 .bg-card { background-color: var(--color-card); }
 .bg-surface { background-color: var(--color-surface); }
