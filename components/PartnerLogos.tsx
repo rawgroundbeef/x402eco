@@ -1,8 +1,8 @@
 const CHAINS = [
-  { id: 'solana', name: 'Solana', colorLogo: '/logos/solana-color.svg', monoLogo: '/logos/solana.svg', url: 'https://solana.com' },
   { id: 'base', name: 'Base', colorLogo: '/logos/base-color.svg', monoLogo: '/logos/base.svg', url: 'https://base.org' },
-  { id: 'stacks', name: 'Stacks', colorLogo: '/logos/stacks-color.svg', monoLogo: '/logos/stacks.svg', url: 'https://stacks.co' },
+  { id: 'solana', name: 'Solana', colorLogo: '/logos/solana-color.svg', monoLogo: '/logos/solana.svg', url: 'https://solana.com' },
   { id: 'allium', name: 'Allium', colorLogo: '/logos/allium-color.svg', monoLogo: '/logos/allium.svg', isDataPartner: true, url: 'https://allium.so' },
+  { id: 'aibtc', name: 'aibtc', colorLogo: '/logos/aibtc.svg', monoLogo: '/logos/aibtc.svg', url: 'https://aibtc.dev' },
 ];
 
 /**
@@ -10,14 +10,18 @@ const CHAINS = [
  */
 export function HeroChainStrip() {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-6 md:gap-9 mt-10 mb-8">
+    <div className="mt-12 mb-10">
+      <p className="text-center font-mono text-[10px] tracking-[2px] uppercase text-gray-dim mb-4">
+        In partnership with
+      </p>
+      <div className="flex flex-wrap items-center justify-center gap-6 md:gap-9">
       {CHAINS.map((chain) => (
         <a
           key={chain.id}
           href={chain.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 opacity-55 hover:opacity-90 transition-opacity duration-250"
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-250"
         >
           <img
             src={chain.colorLogo}
@@ -29,6 +33,7 @@ export function HeroChainStrip() {
           </span>
         </a>
       ))}
+      </div>
     </div>
   );
 }
@@ -46,7 +51,7 @@ export function ChainDividerBar() {
             href={chain.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="opacity-45 hover:opacity-80 transition-opacity duration-200"
+            className="hover:opacity-80 transition-opacity duration-200"
           >
             <img
               src={chain.colorLogo}

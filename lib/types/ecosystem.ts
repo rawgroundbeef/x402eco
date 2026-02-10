@@ -13,7 +13,8 @@ export type CategorySlug =
   | "services-endpoints"
   | "infrastructure-tooling"
   | "facilitators"
-  | "learning-community";
+  | "learning-community"
+  | "skills";
 
 /**
  * A single ecosystem entry (e.g., a project, tool, or resource)
@@ -31,6 +32,8 @@ export interface EcosystemEntry {
   logo?: string | null;
   /** Optional tags for filtering and search */
   tags?: string[];
+  /** CLI command to install this skill (skills category only) */
+  install_command?: string;
 }
 
 /**
@@ -81,5 +84,11 @@ export const CATEGORIES: CategoryMeta[] = [
     title: "Learning & Community",
     shortTitle: "LEARNING",
     description: "Documentation, tutorials, and community resources",
+  },
+  {
+    slug: "skills",
+    title: "Skills",
+    shortTitle: "SKILLS",
+    description: "Installable agent skills for building with x402",
   },
 ];

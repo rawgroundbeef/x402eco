@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { EcosystemEntry, CategoryMeta } from "@/lib/types/ecosystem";
 
 interface CategoryWithEntries {
@@ -14,6 +14,33 @@ interface EcosystemBrowserProps {
 
 const INITIAL_COUNT = 16;
 const LOAD_MORE_COUNT = 12;
+
+const SKILL_ICON_STYLES: Record<string, { bg: string; color: string }> = {
+  "OpenFacilitator": { bg: "rgba(251,191,36,0.12)", color: "#fbbf24" },
+  "x402lint": { bg: "rgba(167,139,250,0.12)", color: "#a78bfa" },
+};
+
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }, [text]);
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="font-mono text-[10px] tracking-[1px] uppercase text-accent border border-accent/[0.12] rounded px-2.5 py-1 cursor-pointer transition-all duration-150 hover:bg-accent/[0.12] whitespace-nowrap flex-shrink-0"
+    >
+      {copied ? "Copied" : "Copy"}
+    </button>
+  );
+}
 
 export function EcosystemBrowser({ categoriesWithEntries }: EcosystemBrowserProps) {
   const [activeCategory, setActiveCategory] = useState(categoriesWithEntries[0]?.category.slug || "");
@@ -84,54 +111,73 @@ export function EcosystemBrowser({ categoriesWithEntries }: EcosystemBrowserProp
 
       {/* Full-width Card Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        {visibleEntries.map((entry) => (
-          <a
-            key={entry.name}
-            href={entry.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block p-4 bg-surface-card border border-border rounded-xl hover:border-accent/50 transition-colors group"
-          >
-            <div className="flex items-start gap-3">
-              {entry.logo ? (
-                <img
-                  src={entry.logo}
-                  alt={`${entry.name} logo`}
-                  className="w-10 h-10 rounded-lg object-contain flex-shrink-0 bg-white/5"
-                />
-              ) : (
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
-                  <span className="text-accent font-medium text-sm">
-                    {entry.name.substring(0, 2).toUpperCase()}
-                  </span>
-                </div>
-              )}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between">
-                  <h4 className="font-medium text-text group-hover:text-accent transition-colors">
-                    {entry.name}
-                  </h4>
-                  <svg
-                    className="w-4 h-4 text-gray-dim group-hover:text-accent transition-colors flex-shrink-0 mt-0.5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+        {visibleEntries.map((entry) => {
+          const skillStyle = SKILL_ICON_STYLES[entry.name];
+
+          return (
+            <a
+              key={entry.name}
+              href={entry.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block p-4 bg-surface-card border border-border rounded-xl hover:border-accent/50 transition-colors group"
+            >
+              <div className="flex items-start gap-3">
+                {entry.logo ? (
+                  <img
+                    src={entry.logo}
+                    alt={`${entry.name} logo`}
+                    className="w-10 h-10 rounded-lg object-contain flex-shrink-0 bg-white/5"
+                  />
+                ) : skillStyle ? (
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 font-medium text-sm"
+                    style={{ background: skillStyle.bg, color: skillStyle.color }}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
+                    {entry.name.substring(0, 2).toUpperCase()}
+                  </div>
+                ) : (
+                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                    <span className="text-accent font-medium text-sm">
+                      {entry.name.substring(0, 2).toUpperCase()}
+                    </span>
+                  </div>
+                )}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-start justify-between">
+                    <h4 className="font-medium text-text group-hover:text-accent transition-colors">
+                      {entry.name}
+                    </h4>
+                    <svg
+                      className="w-4 h-4 text-gray-dim group-hover:text-accent transition-colors flex-shrink-0 mt-0.5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </div>
+                  <p className="text-sm text-gray mt-1 line-clamp-2">
+                    {entry.description}
+                  </p>
+                  {entry.install_command && (
+                    <div className="flex items-center gap-2 mt-2.5">
+                      <code className="font-mono text-[11px] text-cream bg-surface border border-border rounded-[5px] px-2.5 py-1 flex-1 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
+                        {entry.install_command}
+                      </code>
+                      <CopyButton text={entry.install_command} />
+                    </div>
+                  )}
                 </div>
-                <p className="text-sm text-gray mt-1 line-clamp-2">
-                  {entry.description}
-                </p>
               </div>
-            </div>
-          </a>
-        ))}
+            </a>
+          );
+        })}
       </div>
 
       {/* Show More Button */}

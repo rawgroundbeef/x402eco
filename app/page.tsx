@@ -2,6 +2,7 @@ import { Logo } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/FadeIn";
 import { EcosystemSection } from "@/components/EcosystemSection";
+import { MetaSkillSection } from "@/components/MetaSkillSection";
 import { HeroChainStrip } from "@/components/PartnerLogos";
 import {
   HomeClientProvider,
@@ -97,6 +98,11 @@ export default function Home() {
       {/* SECTION 3: ECOSYSTEM */}
       {/* ============================================ */}
       <EcosystemSection />
+
+      {/* ============================================ */}
+      {/* SECTION: META-SKILL */}
+      {/* ============================================ */}
+      <MetaSkillSection />
 
       {/* ============================================ */}
       {/* SECTION 4: FACILITATORS */}
@@ -380,27 +386,6 @@ export default function Home() {
                     className="flex items-center gap-2 text-sm text-gray hover:text-accent transition-colors"
                   >
                     <span>X</span>
-                    <svg
-                      className="w-3 h-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </a>
-                  <a
-                    href="https://discord.gg/NEjcdYTN"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-gray hover:text-accent transition-colors"
-                  >
-                    <span>Discord</span>
                     <svg
                       className="w-3 h-3"
                       fill="none"

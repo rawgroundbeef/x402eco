@@ -3,5 +3,6 @@
   "description": "Validate x402 payment configurations. CLI, SDK, website, and Claude skill for checking configs, addresses, networks, and amounts.",
   "url": "https://x402lint.com",
   "category": "infrastructure-tooling",
-  "logo": "/logos/x402lint.svg"
+  "logo": "/logos/x402lint.svg",
+  "install_command": "npx skills add rawgroundbeef/x402lint"
 }

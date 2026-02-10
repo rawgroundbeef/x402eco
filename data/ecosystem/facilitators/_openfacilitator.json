@@ -3,5 +3,6 @@
   "description": "Free, open-source x402 facilitator. Or become your own facilitator for $5/month.",
   "url": "https://www.openfacilitator.io",
   "category": "facilitators",
-  "logo": "/logos/openfacilitator.svg"
+  "logo": "/logos/openfacilitator.svg",
+  "install_command": "npx skills add rawgroundbeef/openfacilitator"
 }
