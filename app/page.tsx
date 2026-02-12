@@ -84,7 +84,7 @@ export default function Home() {
             <FadeIn delay={0.25}>
               <div className="scroll-hint mt-12 pt-12 border-t border-border text-center">
                 <span className="font-mono text-[11px] tracking-[0.5px] text-gray-dim">
-                  ↓ Ecosystem, Facilitators, etc. continue below ↓
+                  ↓ People, Ecosystem, Facilitators, etc. continue below ↓
                 </span>
               </div>
             </FadeIn>
