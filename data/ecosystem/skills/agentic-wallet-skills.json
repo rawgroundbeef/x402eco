@@ -1,0 +1,8 @@
+{
+  "name": "Agentic Wallet Skills",
+  "description": "Coinbase agent skills for creating wallets, transferring tokens, and managing onchain actions with AgentKit.",
+  "url": "https://www.coinbase.com/developer-platform/products/agentic-wallets",
+  "category": "skills",
+  "logo": "/logos/cdp.png",
+  "install_command": "npx skills add coinbase/agentic-wallet-skills"
+}
