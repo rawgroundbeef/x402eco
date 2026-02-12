@@ -2,6 +2,7 @@ import { Logo } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/FadeIn";
 import { EcosystemSection } from "@/components/EcosystemSection";
+import { TestimonialMarquee } from "@/components/TestimonialMarquee";
 import { MetaSkillSection } from "@/components/MetaSkillSection";
 import { HeroChainStrip } from "@/components/PartnerLogos";
 import {
@@ -93,6 +94,11 @@ export default function Home() {
         {/* Fade gradient to background */}
         <div className="absolute bottom-0 left-0 right-0 h-72 z-[5] pointer-events-none hero-fade" />
       </section>
+
+      {/* ============================================ */}
+      {/* SECTION 2: TESTIMONIAL MARQUEE */}
+      {/* ============================================ */}
+      <TestimonialMarquee />
 
       {/* ============================================ */}
       {/* SECTION 3: ECOSYSTEM */}

@@ -15,8 +15,9 @@ import { EcosystemBrowser } from "@/components/EcosystemBrowser";
  */
 export function EcosystemSection() {
   // Load entries for each category at build time
+  // Skills and People are handled separately below
   const categoriesWithEntries = CATEGORIES.filter(
-    (c) => c.slug !== "skills"
+    (c) => c.slug !== "skills" && c.slug !== "people"
   ).map((categoryMeta) => ({
     category: categoryMeta,
     entries: getEntriesByCategory(categoryMeta.slug),
@@ -31,6 +32,16 @@ export function EcosystemSection() {
     categoriesWithEntries.push({
       category: skillsCategory,
       entries: skillEntries,
+    });
+  }
+
+  // Build the People tab from its own directory
+  const peopleCategory = CATEGORIES.find((c) => c.slug === "people")!;
+  const peopleEntries = getEntriesByCategory("people");
+  if (peopleEntries.length > 0) {
+    categoriesWithEntries.push({
+      category: peopleCategory,
+      entries: peopleEntries,
     });
   }
 

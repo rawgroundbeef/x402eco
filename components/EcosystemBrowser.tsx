@@ -111,73 +111,128 @@ export function EcosystemBrowser({ categoriesWithEntries }: EcosystemBrowserProp
 
       {/* Full-width Card Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        {visibleEntries.map((entry) => {
-          const skillStyle = SKILL_ICON_STYLES[entry.name];
-
-          return (
-            <a
-              key={entry.name}
-              href={entry.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block p-4 bg-surface-card border border-border rounded-xl hover:border-accent/50 transition-colors group"
-            >
-              <div className="flex items-start gap-3">
-                {entry.logo ? (
-                  <img
-                    src={entry.logo}
-                    alt={`${entry.name} logo`}
-                    className="w-10 h-10 rounded-lg object-contain flex-shrink-0 bg-white/5"
-                  />
-                ) : skillStyle ? (
-                  <div
-                    className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 font-medium text-sm"
-                    style={{ background: skillStyle.bg, color: skillStyle.color }}
-                  >
-                    {entry.name.substring(0, 2).toUpperCase()}
-                  </div>
-                ) : (
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
-                    <span className="text-accent font-medium text-sm">
-                      {entry.name.substring(0, 2).toUpperCase()}
-                    </span>
-                  </div>
-                )}
+        {activeCategory === "people"
+          ? visibleEntries.map((entry) => (
+              <a
+                key={entry.name}
+                href={entry.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-[18px] px-5 bg-surface-raised border border-border rounded-[10px] no-underline text-white transition-all duration-150 hover:bg-[var(--color-surface-card)] hover:border-border-light group"
+              >
+                <img
+                  src={entry.avatar_url || ""}
+                  alt={entry.name}
+                  loading="lazy"
+                  className="w-12 h-12 rounded-full object-cover border-2 border-border flex-shrink-0"
+                />
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between">
-                    <h4 className="font-medium text-text group-hover:text-accent transition-colors">
-                      {entry.name}
-                    </h4>
-                    <svg
-                      className="w-4 h-4 text-gray-dim group-hover:text-accent transition-colors flex-shrink-0 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
+                  <div
+                    className="text-white mb-0.5"
+                    style={{
+                      fontFamily: "var(--font-display), 'Bebas Neue', sans-serif",
+                      fontSize: "17px",
+                      letterSpacing: "1.5px",
+                      lineHeight: "1.2",
+                    }}
+                  >
+                    {entry.name}
                   </div>
-                  <p className="text-sm text-gray mt-1 line-clamp-2">
-                    {entry.description}
-                  </p>
-                  {entry.install_command && (
-                    <div className="flex items-center gap-2 mt-2.5">
-                      <code className="font-mono text-[11px] text-cream bg-surface border border-border rounded-[5px] px-2.5 py-1 flex-1 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
-                        {entry.install_command}
-                      </code>
-                      <CopyButton text={entry.install_command} />
-                    </div>
-                  )}
+                  <div className="text-[13px] text-gray leading-snug mb-1">
+                    {entry.role}
+                    {entry.company && (
+                      <>
+                        {" \u00B7 "}
+                        <strong className="text-cream font-medium">
+                          {entry.company}
+                        </strong>
+                      </>
+                    )}
+                  </div>
+                  <span className="font-mono text-[11px] text-accent opacity-70 group-hover:opacity-100 transition-opacity">
+                    @{entry.handle}
+                  </span>
                 </div>
-              </div>
-            </a>
-          );
-        })}
+                <span className="text-gray-dim group-hover:text-gray transition-colors flex-shrink-0">
+                  <svg
+                    className="w-3.5 h-3.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                  </svg>
+                </span>
+              </a>
+            ))
+          : visibleEntries.map((entry) => {
+              const skillStyle = SKILL_ICON_STYLES[entry.name];
+
+              return (
+                <a
+                  key={entry.name}
+                  href={entry.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block p-4 bg-surface-card border border-border rounded-xl hover:border-accent/50 transition-colors group"
+                >
+                  <div className="flex items-start gap-3">
+                    {entry.logo ? (
+                      <img
+                        src={entry.logo}
+                        alt={`${entry.name} logo`}
+                        className="w-10 h-10 rounded-lg object-contain flex-shrink-0 bg-white/5"
+                      />
+                    ) : skillStyle ? (
+                      <div
+                        className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 font-medium text-sm"
+                        style={{ background: skillStyle.bg, color: skillStyle.color }}
+                      >
+                        {entry.name.substring(0, 2).toUpperCase()}
+                      </div>
+                    ) : (
+                      <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                        <span className="text-accent font-medium text-sm">
+                          {entry.name.substring(0, 2).toUpperCase()}
+                        </span>
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between">
+                        <h4 className="font-medium text-text group-hover:text-accent transition-colors">
+                          {entry.name}
+                        </h4>
+                        <svg
+                          className="w-4 h-4 text-gray-dim group-hover:text-accent transition-colors flex-shrink-0 mt-0.5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
+                        </svg>
+                      </div>
+                      <p className="text-sm text-gray mt-1 line-clamp-2">
+                        {entry.description}
+                      </p>
+                      {entry.install_command && (
+                        <div className="flex items-center gap-2 mt-2.5">
+                          <code className="font-mono text-[11px] text-cream bg-surface border border-border rounded-[5px] px-2.5 py-1 flex-1 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
+                            {entry.install_command}
+                          </code>
+                          <CopyButton text={entry.install_command} />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
       </div>
 
       {/* Show More Button */}

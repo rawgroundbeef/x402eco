@@ -511,6 +511,111 @@ h4, h5, h6 {
   }
 }
 
+/* ═══════════════════════════════════════════════
+   TESTIMONIAL MARQUEE
+   ═══════════════════════════════════════════════ */
+
+/* Marquee animations */
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.marquee-row {
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.marquee-row:last-child {
+  margin-bottom: 0;
+}
+
+/* Edge fade gradients */
+.marquee-row::before,
+.marquee-row::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-row::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-background), transparent);
+}
+
+.marquee-row::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-background), transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 16px;
+  padding: 0 8px;
+}
+
+/* Row directions and speeds */
+.marquee-row--left .marquee-track {
+  animation: marquee-left 60s linear infinite;
+}
+
+.marquee-row--right .marquee-track {
+  animation: marquee-right 55s linear infinite;
+}
+
+.marquee-row--left-slow .marquee-track {
+  animation: marquee-left 70s linear infinite;
+}
+
+/* Pause on hover */
+.marquee-row:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Reduced motion: stop marquee, show as static grid */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    width: auto;
+  }
+  .marquee-row {
+    overflow: visible;
+  }
+  /* Hide duplicated cards (show only first 4 of each row) */
+  .marquee-track > :nth-child(n+5) {
+    display: none;
+  }
+}
+
+/* Responsive edge fades */
+@media (max-width: 1024px) {
+  .marquee-row::before,
+  .marquee-row::after {
+    width: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .marquee-row::before,
+  .marquee-row::after {
+    width: 60px;
+  }
+}
+
 /* Hide scrollbar utility for horizontal scroll areas */
 .scrollbar-hide {
   -ms-overflow-style: none;

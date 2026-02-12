@@ -14,7 +14,8 @@ export type CategorySlug =
   | "infrastructure-tooling"
   | "facilitators"
   | "learning-community"
-  | "skills";
+  | "skills"
+  | "people";
 
 /**
  * A single ecosystem entry (e.g., a project, tool, or resource)
@@ -34,6 +35,16 @@ export interface EcosystemEntry {
   tags?: string[];
   /** CLI command to install this skill (skills category only) */
   install_command?: string;
+  /** Person's role/title (people category only) */
+  role?: string;
+  /** Person's company or project (people category only) */
+  company?: string;
+  /** X/Twitter handle without @ (people category only) */
+  handle?: string;
+  /** Avatar image URL (people category only) */
+  avatar_url?: string;
+  /** Link to featured tweet (people category only) */
+  tweet_url?: string;
 }
 
 /**
@@ -90,5 +101,11 @@ export const CATEGORIES: CategoryMeta[] = [
     title: "Skills",
     shortTitle: "SKILLS",
     description: "Installable agent skills for building with x402",
+  },
+  {
+    slug: "people",
+    title: "People",
+    shortTitle: "PEOPLE",
+    description: "Key builders, contributors, and advocates in the x402 network",
   },
 ];
