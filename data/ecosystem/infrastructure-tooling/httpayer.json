@@ -1,0 +1,8 @@
+{
+  "name": "HTTPayer",
+  "description": "Middleware and developer tools for 402 response codes",
+  "url": "https://www.httpayer.com",
+  "category": "infrastructure-tooling",
+  "logo": "/logos/httpayer.png",
+  "tags": ["cross-chain","privacy","client-side","web3-wallet-optional","middleware"]
+}
