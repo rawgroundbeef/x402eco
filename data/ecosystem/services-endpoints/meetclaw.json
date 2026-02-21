@@ -1,0 +1,8 @@
+{
+  "name": "Meetclaw",
+  "description": "x402-paid meeting recording, transcription, and ecosystem research for agents",
+  "url": "https://github.com/guzus/meetclaw",
+  "category": "services-endpoints",
+  "logo": null,
+  "tags": ["agents", "transcription", "research", "meetings", "x402"]
+}
