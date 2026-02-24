@@ -1,0 +1,7 @@
+{
+  "name": "AsterPay",
+  "description": "EUR settlement API for x402 payments via SEPA Instant on Base",
+  "url": "https://asterpay.io",
+  "category": "services-endpoints",
+  "logo": "/logos/asterpay.png"
+}
