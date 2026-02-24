@@ -26,7 +26,8 @@ Add a file named `your-project.json` in the appropriate category directory:
   "name": "Your Project",
   "description": "A short description of what your project does.",
   "url": "https://your-project.com",
-  "category": "facilitators"
+  "category": "facilitators",
+  "logo": "/logos/your-project.svg"
 }
 ```
 
@@ -38,17 +39,19 @@ Add a file named `your-project.json` in the appropriate category directory:
 | `description` | Yes | One-liner description (keep it under ~100 characters) |
 | `url` | Yes | Primary link (website, repo, or docs) |
 | `category` | Yes | Must match the directory name |
-| `logo` | No | Path relative to `public/` (e.g., `"/logos/your-project.svg"`) |
+| `logo` | **Yes** | Path relative to `public/` (e.g., `"/logos/your-project.svg"`) |
 | `tags` | No | Array of tags for future filtering |
 | `install_command` | No | CLI install command if you have a skill (see below) |
 
-### 3. Add a logo (optional)
+### 3. Add a logo (required)
 
-Drop your logo in `public/logos/` as an SVG or PNG. Reference it in your JSON:
+Drop your logo in `public/logos/` as an SVG or PNG (under 50KB). Reference it in your JSON:
 
 ```json
 "logo": "/logos/your-project.svg"
 ```
+
+PRs without a logo will be asked to add one before merging.
 
 ### 4. Open a PR
 
