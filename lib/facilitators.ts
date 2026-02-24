@@ -27,7 +27,7 @@ export interface FacilitatorCard {
   dailyData: DailyDataPoint[];
 }
 
-export type TimeRange = '7d' | '30d' | 'all';
+export type TimeRange = '24h' | '7d' | '30d' | 'all';
 
 /**
  * Get the cutoff date for a given time range
@@ -36,7 +36,9 @@ function getCutoffDate(range: TimeRange): Date {
   const cutoff = new Date();
   cutoff.setHours(0, 0, 0, 0);
 
-  if (range === '7d') {
+  if (range === '24h') {
+    cutoff.setDate(cutoff.getDate() - 1);
+  } else if (range === '7d') {
     cutoff.setDate(cutoff.getDate() - 7);
   } else if (range === '30d') {
     cutoff.setDate(cutoff.getDate() - 30);
@@ -164,29 +166,65 @@ export interface StatsBarData {
   volumeDelta: number | null;      // percentage, e.g. 12.3
   txnDelta: number | null;         // percentage
   facilitatorDelta: number | null; // absolute change, e.g. +2
+  dateFrom: string | null;         // earliest date in range, e.g. "2025-01-25"
+  dateTo: string | null;           // latest date in range, e.g. "2025-02-24"
 }
 
 /**
  * Derive stats bar data from raw Allium rows
- * Compares last 30 days vs prior 30 days for deltas
+ * Compares selected window vs same-length prior window for deltas.
+ * For 'all', deltas are null (no prior period).
  *
  * @param rows - Raw rows from Allium API
+ * @param range - Time range to aggregate
  * @returns StatsBarData with totals and deltas
  */
-export function deriveStatsBar(rows: AlliumRow[]): StatsBarData {
+export function deriveStatsBar(rows: AlliumRow[], range: TimeRange = '30d'): StatsBarData {
   const now = new Date();
-  const thirtyDaysAgo = new Date(now.getTime() - 30 * 86400000);
-  const sixtyDaysAgo = new Date(now.getTime() - 60 * 86400000);
+  const windowMs: Record<TimeRange, number> = {
+    '24h': 1 * 86400000,
+    '7d': 7 * 86400000,
+    '30d': 30 * 86400000,
+    'all': 0,
+  };
 
-  const recent = rows.filter(r => new Date(r.ts) >= thirtyDaysAgo);
-  const prior = rows.filter(r => {
-    const d = new Date(r.ts);
-    return d >= sixtyDaysAgo && d < thirtyDaysAgo;
-  });
+  const isAll = range === 'all';
+  const windowStart = isAll
+    ? new Date(0)
+    : new Date(now.getTime() - windowMs[range]);
+  const priorStart = isAll
+    ? null
+    : new Date(windowStart.getTime() - windowMs[range]);
+
+  const recent = rows.filter(r => new Date(r.ts) >= windowStart);
+  const prior = isAll
+    ? []
+    : rows.filter(r => {
+        const d = new Date(r.ts);
+        return d >= priorStart! && d < windowStart;
+      });
 
   const totalVolume = recent.reduce((s, r) => s + r.volume, 0);
   const totalTransactions = recent.reduce((s, r) => s + r.transactions, 0);
   const facilitatorCount = new Set(recent.map(r => r.facilitator)).size;
+
+  // Derive actual date range from data
+  const recentDates = recent.map(r => r.ts).sort();
+  const dateFrom = recentDates.length > 0 ? recentDates[0] : null;
+  const dateTo = recentDates.length > 0 ? recentDates[recentDates.length - 1] : null;
+
+  if (isAll) {
+    return {
+      totalVolume,
+      totalTransactions,
+      facilitatorCount,
+      volumeDelta: null,
+      txnDelta: null,
+      facilitatorDelta: null,
+      dateFrom,
+      dateTo,
+    };
+  }
 
   const priorVolume = prior.reduce((s, r) => s + r.volume, 0);
   const priorTxns = prior.reduce((s, r) => s + r.transactions, 0);
@@ -202,6 +240,8 @@ export function deriveStatsBar(rows: AlliumRow[]): StatsBarData {
     volumeDelta: pctDelta(totalVolume, priorVolume),
     txnDelta: pctDelta(totalTransactions, priorTxns),
     facilitatorDelta: priorFacilitators > 0 ? facilitatorCount - priorFacilitators : null,
+    dateFrom,
+    dateTo,
   };
 }
 
