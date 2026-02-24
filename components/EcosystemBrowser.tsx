@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { EcosystemEntry, CategoryMeta } from "@/lib/types/ecosystem";
 
 interface CategoryWithEntries {
@@ -14,6 +14,22 @@ interface EcosystemBrowserProps {
 
 const INITIAL_COUNT = 16;
 const LOAD_MORE_COUNT = 12;
+
+function filterEntries(entries: EcosystemEntry[], query: string): EcosystemEntry[] {
+  const q = query.toLowerCase().trim();
+  if (!q) return entries;
+  return entries.filter((entry) => {
+    const fields = [
+      entry.name,
+      entry.description,
+      entry.role,
+      entry.company,
+      entry.handle,
+      ...(entry.tags || []),
+    ];
+    return fields.some((f) => f?.toLowerCase().includes(q));
+  });
+}
 
 const SKILL_ICON_STYLES: Record<string, { bg: string; color: string }> = {
   "OpenFacilitator": { bg: "rgba(251,191,36,0.12)", color: "#fbbf24" },
@@ -44,6 +60,7 @@ function CopyButton({ text }: { text: string }) {
 
 export function EcosystemBrowser({ categoriesWithEntries }: EcosystemBrowserProps) {
   const [activeCategory, setActiveCategory] = useState(categoriesWithEntries[0]?.category.slug || "");
+  const [searchQuery, setSearchQuery] = useState("");
   const [visibleCounts, setVisibleCounts] = useState<Record<string, number>>(() => {
     const counts: Record<string, number> = {};
     categoriesWithEntries.forEach(({ category }) => {
@@ -52,9 +69,26 @@ export function EcosystemBrowser({ categoriesWithEntries }: EcosystemBrowserProp
     return counts;
   });
 
+  const filteredByCategory = useMemo(() => {
+    const map: Record<string, EcosystemEntry[]> = {};
+    categoriesWithEntries.forEach(({ category, entries }) => {
+      map[category.slug] = filterEntries(entries, searchQuery);
+    });
+    return map;
+  }, [categoriesWithEntries, searchQuery]);
+
   const activeData = categoriesWithEntries.find(
     ({ category }) => category.slug === activeCategory
   );
+
+  const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    setVisibleCounts((prev) => {
+      const reset: Record<string, number> = {};
+      for (const key in prev) reset[key] = INITIAL_COUNT;
+      return reset;
+    });
+  }, []);
 
   const handleShowMore = () => {
     setVisibleCounts((prev) => ({
@@ -65,9 +99,10 @@ export function EcosystemBrowser({ categoriesWithEntries }: EcosystemBrowserProp
 
   if (!activeData) return null;
 
-  const visibleEntries = activeData.entries.slice(0, visibleCounts[activeCategory]);
-  const hasMore = visibleCounts[activeCategory] < activeData.entries.length;
-  const remaining = activeData.entries.length - visibleCounts[activeCategory];
+  const filtered = filteredByCategory[activeCategory] || [];
+  const visibleEntries = filtered.slice(0, visibleCounts[activeCategory]);
+  const hasMore = visibleCounts[activeCategory] < filtered.length;
+  const remaining = filtered.length - visibleCounts[activeCategory];
 
   return (
     <div>
@@ -84,6 +119,8 @@ export function EcosystemBrowser({ categoriesWithEntries }: EcosystemBrowserProp
         >
           {categoriesWithEntries.map(({ category, entries }) => {
             const isActive = activeCategory === category.slug;
+            const filteredCount = filteredByCategory[category.slug]?.length ?? entries.length;
+            const isFiltered = searchQuery.trim() !== "" && filteredCount !== entries.length;
             return (
               <button
                 key={category.slug}
@@ -99,7 +136,7 @@ export function EcosystemBrowser({ categoriesWithEntries }: EcosystemBrowserProp
               >
                 <span>{category.shortTitle}</span>
                 <span className={`ml-1.5 ${isActive ? "opacity-80" : "opacity-60"}`}>
-                  {entries.length}
+                  {isFiltered ? `${filteredCount}/${entries.length}` : entries.length}
                 </span>
               </button>
             );
@@ -109,6 +146,43 @@ export function EcosystemBrowser({ categoriesWithEntries }: EcosystemBrowserProp
         <div className="absolute right-0 top-0 bottom-2 w-8 bg-gradient-to-l from-surface-card/50 to-transparent pointer-events-none md:hidden" />
       </div>
 
+      {/* Search Input */}
+      <div className="relative mb-4">
+        <svg
+          className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-dim pointer-events-none"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          placeholder="Search by name, description, or tags..."
+          className="w-full pl-10 pr-9 py-2.5 bg-surface-card border border-border rounded-lg font-mono text-sm text-text placeholder:text-gray-dim focus:outline-none focus:border-accent/50 transition-colors"
+        />
+        {searchQuery && (
+          <button
+            onClick={() => { setSearchQuery(""); setVisibleCounts((prev) => { const reset: Record<string, number> = {}; for (const key in prev) reset[key] = INITIAL_COUNT; return reset; }); }}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-dim hover:text-text transition-colors cursor-pointer"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        )}
+      </div>
+
+      {/* Empty State */}
+      {filtered.length === 0 && searchQuery.trim() !== "" ? (
+        <div className="text-center py-12 text-gray">
+          <p className="font-mono text-sm">No results for &ldquo;{searchQuery.trim()}&rdquo;</p>
+          <p className="text-xs text-gray-dim mt-1">Try a different search term</p>
+        </div>
+      ) : (
+      <>
       {/* Full-width Card Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {activeCategory === "people"
@@ -246,6 +320,8 @@ export function EcosystemBrowser({ categoriesWithEntries }: EcosystemBrowserProp
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </button>
+      )}
+      </>
       )}
     </div>
   );
