@@ -152,7 +152,16 @@ export function ServersInfoButtons() {
 /**
  * StatsBar - Live stats derived from Allium data
  */
+const STATS_RANGES: { value: TimeRange; label: string }[] = [
+  { value: "24h", label: "24H" },
+  { value: "7d", label: "7D" },
+  { value: "30d", label: "30D" },
+  { value: "all", label: "ALL" },
+];
+
 export function StatsBar() {
+  const [statsRange, setStatsRange] = useState<TimeRange>("30d");
+
   // Fetch real data from our API route
   const { data, error, isLoading } = useSWR<{ data: AlliumRow[] }>(
     "/api/facilitators",
@@ -166,8 +175,8 @@ export function StatsBar() {
   // Derive stats from the data
   const stats = useMemo(() => {
     if (!data?.data) return null;
-    return deriveStatsBar(data.data);
-  }, [data]);
+    return deriveStatsBar(data.data, statsRange);
+  }, [data, statsRange]);
 
   // Loading state
   if (isLoading) {
@@ -227,6 +236,17 @@ export function StatsBar() {
     );
   };
 
+  const formatDateRange = (from: string | null, to: string | null): string | null => {
+    if (!from || !to) return null;
+    const fmt = (iso: string) => {
+      const d = new Date(iso + "T00:00:00");
+      return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    };
+    return `${fmt(from)} – ${fmt(to)}`;
+  };
+
+  const dateRange = formatDateRange(stats.dateFrom, stats.dateTo);
+
   return (
     <div className="max-w-3xl mx-auto">
       <div className="stats-bar backdrop-blur-xl border border-border rounded-xl overflow-hidden">
@@ -262,6 +282,28 @@ export function StatsBar() {
               </span>
               {renderDelta(stats.facilitatorDelta, false)}
             </div>
+          </div>
+        </div>
+        <div className="border-t border-border px-5 py-2 flex items-center justify-between">
+          {dateRange ? (
+            <span className="font-mono text-xs text-gray">{dateRange}</span>
+          ) : (
+            <span className="font-mono text-xs text-gray">Lifetime</span>
+          )}
+          <div className="flex rounded-lg border border-border overflow-hidden">
+            {STATS_RANGES.map((r) => (
+              <button
+                key={r.value}
+                onClick={() => setStatsRange(r.value)}
+                className={`px-2.5 py-1 text-xs font-mono transition-colors ${
+                  statsRange === r.value
+                    ? "bg-accent text-dark"
+                    : "bg-transparent text-gray hover:text-text"
+                }`}
+              >
+                {r.label}
+              </button>
+            ))}
           </div>
         </div>
       </div>
