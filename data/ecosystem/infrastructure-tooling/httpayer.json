@@ -1,6 +1,0 @@
-{
-  "name": "HTTPayer",
-  "description": "SDK + CLI that makes paid APIs as simple as curl. Built on x402 + Chainlink CCIP, turns HTTP 402 into a programmable payment layer for APIs, agents, and LLMs.",
-  "url": "https://github.com/Bhami628/httpayer",
-  "category": "infrastructure-tooling"
-}
