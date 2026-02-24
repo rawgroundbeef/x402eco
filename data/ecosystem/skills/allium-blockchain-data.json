@@ -1,0 +1,8 @@
+{
+  "name": "Allium Blockchain Data",
+  "description": "Pay-per-call blockchain data via x402. Token prices, wallet balances, transaction history, and PnL — no API key, no registration. USDC on Base.",
+  "url": "https://agents.allium.so",
+  "category": "skills",
+  "logo": "/logos/allium-color.svg",
+  "install_command": "npx skills add https://agents.allium.so/skills/x402-skill.md"
+}
