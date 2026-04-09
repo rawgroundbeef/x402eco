@@ -1,0 +1,8 @@
+{
+  "name": "Silverback DeFi Intelligence",
+  "description": "26 x402 DeFi endpoints — swaps, yield, audits, whale tracking, and more on Base",
+  "url": "https://silverbackdefi.app/x402",
+  "category": "services-endpoints",
+  "logo": "/logos/silverback.png",
+  "install_command": "npx skills add RidingLiquid/silverback-skill"
+}
