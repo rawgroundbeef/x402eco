@@ -2,7 +2,7 @@
   "name": "Corbits",
   "description": "Infrastructure for agentic commerce — enabling AI agents to discover, transact with, and pay for services via instant, multi-network settlement.",
   "url": "https://corbits.dev",
-  "category": "facilitators",
+  "category": "infrastructure-tooling",
   "logo": "/logos/corbits.png",
   "install_command": "npx skills add corbits-infra/corbits-skill"
 }
