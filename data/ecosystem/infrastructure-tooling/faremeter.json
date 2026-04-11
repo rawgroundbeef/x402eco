@@ -1,6 +1,6 @@
 {
   "name": "Faremeter",
-  "description": "Lightweight OSS x402 framework with client, middleware, server plugins",
+  "description": "Universal framework for agentic transactions — handling settlement and routing across networks and tokens.",
   "url": "https://faremeter.xyz",
   "category": "infrastructure-tooling",
   "logo": "/logos/faremeter.png"
