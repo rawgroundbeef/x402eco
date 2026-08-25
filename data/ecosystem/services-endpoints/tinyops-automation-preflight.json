@@ -1,0 +1,14 @@
+{
+  "name": "TinyOps Automation Integration Preflight",
+  "description": "Public-page automation readiness and acceptance-pack API with x402 USDC pricing",
+  "url": "https://tinyopsstudio.com/automation-preflight-api.html",
+  "category": "services-endpoints",
+  "logo": "/logos/tinyops-automation-preflight.svg",
+  "tags": [
+    "automation",
+    "website audit",
+    "integration testing",
+    "acceptance testing",
+    "x402"
+  ]
+}
