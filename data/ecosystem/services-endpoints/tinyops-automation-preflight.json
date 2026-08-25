@@ -4,6 +4,7 @@
   "url": "https://tinyopsstudio.com/automation-preflight-api.html",
   "category": "services-endpoints",
   "logo": "/logos/tinyops-automation-preflight.svg",
+  "install_command": "npx skills add tinyopsstudio/automation-integration-preflight-action",
   "tags": [
     "automation",
     "website audit",
