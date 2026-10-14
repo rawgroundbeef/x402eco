@@ -1,0 +1,8 @@
+
+{
+  "name": "Base Wallet Activity Profile",
+  "description": "x402 API for Base wallet activity history, transaction counts and heuristic risk context.",
+  "url": "https://x402-wallet-profile-api-production.up.railway.app",
+  "category": "services-endpoints",
+  "logo": "/logos/base-wallet-profile.svg"
+}
