@@ -1,0 +1,8 @@
+{
+  "name": "Clarity",
+  "description": "Base x402 gateway: $0.001 chat and $2 research reports via local Ollama for external USDC payers. Paid API endpoint: https://desktop-o99r0sf.tail935fba.ts.net",
+  "url": "https://flipperspectives-crypto.github.io/clarity-docs/",
+  "category": "services-endpoints",
+  "logo": "/logos/clarity.svg",
+  "tags": ["ai", "inference", "research", "base"]
+}
