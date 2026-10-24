@@ -1,0 +1,7 @@
+{
+  "name": "Aomi Labs Task API — Arc Mainnet",
+  "description": "Aomi Labs builds the execution harness for onchain finance. Its Task API lets agents inspect a simulated Arc Mainnet action before buying the exact unsigned transaction bundle: 0.01 USDC for preparation over x402, free status and signed preview, then a separate retrieval purchase at 3% of simulated gross outgoing USDC (free for zero outflow). The buyer's wallet signs and broadcasts.",
+  "url": "https://api.aomi.dev/v1/task/build",
+  "category": "services-endpoints",
+  "logo": "/logos/aomi.svg"
+}
