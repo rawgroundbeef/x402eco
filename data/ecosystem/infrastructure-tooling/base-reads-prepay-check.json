@@ -1,0 +1,7 @@
+{
+  "name": "Base Reads Pre-pay Check",
+  "description": "Signed, deterministic facts about an x402 endpoint before you pay it. Pay-per-call on Base.",
+  "url": "https://89-116-220-218.sslip.io/?ref=x402eco",
+  "category": "infrastructure-tooling",
+  "logo": "/logos/base-reads-prepay-check.png"
+}
