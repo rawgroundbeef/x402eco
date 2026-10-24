@@ -1,0 +1,8 @@
+{
+  "name": "Reise-Agent Attest",
+  "description": "Ed25519-signed travel price attestations with plausibility checks, $0.01 USDC per call",
+  "url": "https://travel.hanibal-ai.com",
+  "category": "services-endpoints",
+  "logo": "/logos/reise-agent-attest.svg",
+  "tags": ["travel", "attestation", "flights", "hotels"]
+}
