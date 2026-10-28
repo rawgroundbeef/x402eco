@@ -1,0 +1,25 @@
+{
+  "name": "YRUZ",
+  "description": "335 x402 v1/v2 APIs and an x402 MCP server on Solana or Base: package advisories, EU tenders, Wikidata facts, 24 h promo board, site audit, web to Markdown, crypto",
+  "url": "https://yruz.one/x402.php",
+  "category": "services-endpoints",
+  "logo": "/logos/yruz.png",
+  "tags": [
+    "crypto",
+    "solana",
+    "base",
+    "web-scraping",
+    "enrichment",
+    "security",
+    "weather",
+    "domain",
+    "seo",
+    "mcp",
+    "x402-v1",
+    "x402-v2",
+    "supply-chain",
+    "procurement",
+    "knowledge-graph",
+    "advertising"
+  ]
+}
