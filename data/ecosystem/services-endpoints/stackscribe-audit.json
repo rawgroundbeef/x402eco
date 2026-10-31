@@ -1,0 +1,8 @@
+{
+  "name": "StackScribe Audit",
+  "description": "Pay-per-call Claude Code / MCP config risk scan over x402, 0.02 USDC/call on Polygon",
+  "url": "https://github.com/stackscribe-ai/coding-agent-audit#pay-per-call-api-for-other-ai-agents--ci-systems",
+  "category": "services-endpoints",
+  "logo": "/logos/stackscribe-audit.svg",
+  "tags": ["security", "mcp", "claude-code", "ci"]
+}
