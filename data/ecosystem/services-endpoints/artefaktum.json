@@ -1,0 +1,7 @@
+{
+  "name": "Artefaktum",
+  "description": "Searchable artifact storage for AI agents: upload files, search them and read them back, paid per request in USDC on Base. 10 MiB stored for 30 days costs a cent; no account, no API key.",
+  "url": "https://artefaktum.dev/x402/",
+  "category": "services-endpoints",
+  "logo": "/logos/artefaktum.png"
+}
