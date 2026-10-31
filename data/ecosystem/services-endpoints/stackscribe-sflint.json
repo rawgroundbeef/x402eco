@@ -1,0 +1,8 @@
+{
+  "name": "StackScribe Lint",
+  "description": "Pay-per-call Python silent-failure bug linter over x402, 0.02 USDC/call on Polygon",
+  "url": "https://github.com/stackscribe-ai/silent-failure-lint#pay-per-call-api-for-ai-agents--ci",
+  "category": "services-endpoints",
+  "logo": "/logos/stackscribe-sflint.svg",
+  "tags": ["linting", "code-quality", "python", "ci"]
+}
