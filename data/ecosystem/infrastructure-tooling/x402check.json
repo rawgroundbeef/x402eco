@@ -1,0 +1,7 @@
+{
+  "name": "x402check",
+  "description": "Preflight x402 endpoints before an agent pays: ok|caution|avoid, payTo history, $0.002/URL USDC on Base.",
+  "url": "https://x402check.dev",
+  "category": "infrastructure-tooling",
+  "logo": "/logos/x402check.png"
+}
