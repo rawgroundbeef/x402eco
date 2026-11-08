@@ -1,0 +1,10 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Truth Bear">
+  <rect width="128" height="128" rx="28" fill="#1f6f54"/>
+  <circle cx="44" cy="46" r="15" fill="#fdf8ef"/>
+  <circle cx="84" cy="46" r="15" fill="#fdf8ef"/>
+  <circle cx="64" cy="72" r="31" fill="#fdf8ef"/>
+  <circle cx="53" cy="68" r="4.2" fill="#1f6f54"/>
+  <circle cx="75" cy="68" r="4.2" fill="#1f6f54"/>
+  <ellipse cx="64" cy="83" rx="13" ry="9.5" fill="#e3efe9"/>
+  <circle cx="64" cy="80.5" r="3.6" fill="#1f6f54"/>
+</svg>
