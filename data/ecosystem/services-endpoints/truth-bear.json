@@ -1,0 +1,8 @@
+{
+  "name": "Truth Bear",
+  "description": "Verifiable official-source records for AI agents: record_hash + Ed25519 citation, x402 per-call.",
+  "url": "https://truthbear.co",
+  "category": "services-endpoints",
+  "logo": "/logos/truth-bear.svg",
+  "tags": ["data", "official-records", "sec-edgar", "mcp", "verifiable", "provenance"]
+}
