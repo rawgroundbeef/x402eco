@@ -1,0 +1,7 @@
+{
+  "name": "Keptvow",
+  "description": "Trust checks for x402 sellers: ok, careful or stop, from real payment history. API, MCP and A2A.",
+  "url": "https://keptvow.com",
+  "category": "infrastructure-tooling",
+  "logo": "/logos/keptvow.svg"
+}
