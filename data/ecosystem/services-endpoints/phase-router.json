@@ -1,0 +1,7 @@
+{
+  "name": "Phase Router",
+  "description": "OpenAI-compatible router for ~400 models, pay per request in USDT on Phase L1 via x402",
+  "url": "https://router.phase.xyz",
+  "category": "services-endpoints",
+  "logo": "/logos/phase-router.svg"
+}
